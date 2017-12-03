@@ -1,0 +1,1 @@
+json.extract! @bicycle, :id, :name, :description, :kind, :price, :created_at, :updated_at

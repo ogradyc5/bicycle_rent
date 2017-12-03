@@ -1,0 +1,19 @@
+= bootstrap_form_for(@bicycle) do |f|
+  - if @bicycle.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@bicycle.errors.count, "error")
+        prohibited this bicycle from being saved:
+      %ul
+        - @bicycle.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.text_field :name
+  .field
+    = f.text_area :description
+  .field
+    = f.radio_button :kind, 'A', label: 'A', inline: true, checked: true
+    = f.radio_button :kind, 'B', label: 'B', inline: true
+    = f.radio_button :kind, 'C', label: 'C', inline: true
+  .actions
+    = f.submit nil, class: 'btn btn-success'

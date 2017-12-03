@@ -1,0 +1,1 @@
+json.extract! @rental, :id, :starts_on, :ends_on, :bicycle, :created_at, :updated_at

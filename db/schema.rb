@@ -11,25 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203092816) do
+ActiveRecord::Schema.define(version: 20150830180031) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "bicycles", force: :cascade do |t|
-    t.string   "make"
     t.string   "name"
-    t.decimal  "rent_price"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "description"
+    t.string   "kind"
+    t.decimal "price"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
-  create_table "user_bicycles", force: :cascade do |t|
-    t.integer  "user_id"
+  create_table "rentals", force: :cascade do |t|
+    t.date     "starts_on"
+    t.date     "ends_on"
     t.integer  "bicycle_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
   end
 
-  add_index "user_bicycles", ["bicycle_id"], name: "index_user_bicycles_on_bicycle_id"
-  add_index "user_bicycles", ["user_id"], name: "index_user_bicycles_on_user_id"
+  add_index "rentals", ["user_id"], name: "index_rentals_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -40,13 +45,14 @@ ActiveRecord::Schema.define(version: 20171203092816) do
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.string   "current_sign_in_ip"
-    t.string   "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "rentals", "users"
 end

@@ -1,0 +1,16 @@
+%h1.text-center
+  = @rental.bicycle.name
+  rental
+%p
+  %strong Starts on:
+  = @rental.starts_on
+%p
+  %strong Ends on:
+  = @rental.ends_on
+%p
+  %strong Total price:
+  = @rental.sum_price
+  zł
+
+= link_to 'Edit', edit_bicycle_rental_path(@rental.bicycle, @rental), class: 'btn btn-info'
+= link_to 'Back', bicycle_path(@rental.bicycle), class: 'btn btn-default'

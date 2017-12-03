@@ -1,0 +1,20 @@
+%h1 Listing Rentals
+%table
+  %thead
+    %tr
+      %th Starts on
+      %th Ends on
+      %th Bicycle
+      %th{:colspan => "3"}
+  %tbody
+    - @rentals.each do |rental|
+      %tr
+        %td= rental.starts_on
+        %td= rental.ends_on
+        %td= rental.bicycle.name
+        %td= link_to 'Show', bicycle_rental_path(rental.bicycle, rental)
+        - if user_signed_in?
+          %td= link_to 'Edit', edit_bicycle_rental_path(rental.bicycle, rental)
+          %td= link_to 'Destroy', bicycle_rental_path(rental.bicycle, rental), method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Rental', new_bicycle_rental_path

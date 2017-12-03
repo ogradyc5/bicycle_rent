@@ -1,0 +1,6 @@
+%h1.text-center
+  New Rental:
+  = @bicycle.name
+= render 'form'
+.pull-right
+  = link_to 'Back', bicycle_path(@rental.bicycle), class: 'btn btn-default'

@@ -1,0 +1,39 @@
+%h1.text-center= @bicycle.name
+%p
+  %strong Class:
+  = @bicycle.kind
+%p
+  %strong Price/day:
+  = @bicycle.price
+  zł
+%p= @bicycle.description
+
+%h3.text-center Rentals
+%table.table.table-striped
+  %th Starts on
+  %th Ends on
+  %th User email
+  %th Price
+  - @rentals.each do |rental|
+    %tr
+      %td= rental.starts_on
+      %td= rental.ends_on
+      %td= mail_to rental.user.email
+      %td
+        = rental.sum_price
+        zł
+  %tr
+    %td
+      %em Total income from this bicycle:
+    %td
+    %td
+    %td
+      = @bicycle.total_income
+      zł
+
+
+.pull-right
+  = link_to 'Back', bicycles_path, class: 'btn btn-default'
+  - if user_signed_in?
+    = link_to 'Edit', edit_bicycle_path(@bicycle), class: 'btn btn-info'
+  = link_to 'Rent this bicycle', new_bicycle_rental_path(@bicycle), class: 'btn btn-success'

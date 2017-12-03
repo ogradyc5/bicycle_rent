@@ -1,0 +1,15 @@
+= bootstrap_form_for([@bicycle, @rental]) do |f|
+  - if @rental.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@rental.errors.count, "error")
+        prohibited this rental from being saved:
+      %ul
+        - @rental.errors.full_messages.each do |message|
+          %li= message
+  .field
+    = f.date_select :starts_on
+  .field
+    = f.date_select :ends_on
+  .actions
+    = f.submit nil, class: 'btn btn-success'
