@@ -1,0 +1,26 @@
+<% if params[:action] == "search" %>
+  <div class="results-block">
+    <%= bootstrap_flash %>
+  </div>
+<% end %>
+<% if @bicycle %>
+  <div class="well results-block">
+    <strong>Make: </strong><%= @bicycle.make %>
+    <strong>Name: </strong><%= @bicycle.name%>
+    <strong>Rent Price: </strong><%= @bicycle.rent_price%>
+    <% if current_user.can_add_bicycle?(@bicycle.name) %>
+      <%= link_to "Rent this Bike", user_bicycles_path(user: current_user, bicycle_name: @bicycle.name),
+              class: "btn btn-xs btn-success", method: :post %>
+    <% else %>
+      <span class="label label-default">
+        Bicycle cannot be rented because you are already renting
+        <% if !current_user.under_bicycle_limit?%>
+          3 bicycles
+        <% end %>
+        <% if current_user.bicycle_already_added?(@bicycle.name)%>
+          this bicycle
+        <% end %>
+      </span>
+    <% end %>
+  </div>
+<% end %>

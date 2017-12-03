@@ -1,1 +1,3 @@
-My Cloud Application Bicycle Renting
+- Build form_tag
+- Route -> search_bicycles
+- Controller -> action - bicycles_controller.rb search_bicycles

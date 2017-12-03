@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  make: MyString
+  name: MyString
+  rent_price: 9.99
+
+two:
+  make: MyString
+  name: MyString
+  rent_price: 9.99
